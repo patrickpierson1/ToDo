@@ -1,0 +1,141 @@
+nav {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Home Page Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1000px;
+  gap: 50px;
+  text-align: left; /* Aligns text properly */
+}
+
+/* Hero Image */
+.home-icon {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Wraps hero text content */
+.hero-content {
+  max-width: 500px;
+}
+
+/* Hero Title */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+/* Colored Word in Title */
+.hero-title span {
+  color: #4f46e5;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* CTA Button */
+.cta-button {
+  background: linear-gradient(90deg, #000000, #555);
+  color: white;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  border: none;
+}
+
+.cta-button:hover {
+  background: linear-gradient(90deg, #333, #777);
+  transform: scale(1.05);
+}
+
+/* Features Section */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 5%;
+  max-width: 1000px;
+  flex-wrap: wrap;
+}
+
+/* Feature Container (for image & text side by side) */
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  max-width: 800px;
+  text-align: left;
+}
+
+/* Feature Images */
+.additional-icon {
+  width: 100%;
+  max-width: 200px;
+}
+
+/* Feature Cards */
+.feature-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+/* Feature Title */
+.feature-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+/* Feature Description */
+.feature-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Feature Button with Gradient */
+.feature-button {
+  background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 15px;
+  border: none;
+}
+
+.feature-button:hover {
+  background: linear-gradient(90deg, #4338ca, #6d28d9);
+  transform: scale(1.05);
+}
