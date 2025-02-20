@@ -1,0 +1,67 @@
+/* Tutorial Home Page Styles */
+.tutorial-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  /* Tutorial Section Layout */
+  .tutorial-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 1000px;
+    margin-bottom: 60px;
+    text-align: left;
+  }
+  
+  /* Tutorial Image */
+  .tutorial-image {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  /* Text Content */
+  .tutorial-content {
+    max-width: 500px;
+  }
+  
+  .tutorial-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+  
+  .tutorial-title span {
+    color: #4f46e5;
+  }
+  
+  .tutorial-description {
+    font-size: 1.5rem;
+    color: #737373;
+    margin-bottom: 20px;
+  }
+  
+  /* Start Button */
+  .start-button {
+    background: linear-gradient(90deg, #000000, #555);
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    border: none;
+  }
+  
+  .start-button:hover {
+    background: linear-gradient(90deg, #333, #777);
+    transform: scale(1.05);
+  }
+  
