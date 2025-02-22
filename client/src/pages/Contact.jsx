@@ -39,7 +39,7 @@ const Contact = () => {
         <input type="text" className="contact-input" placeholder="Last name" />
 
         <label className="contact-label">Email</label>
-        <input type="email" className="contact-input" placeholder="you@company.com" />
+        <input type="email" className="contact-input" placeholder="Enter your email" />
 
         <label className="contact-label">Phone number</label>
         <div className="phone-container">
