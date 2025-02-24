@@ -94,7 +94,6 @@ async function setUserEmail(id, newEmail) {
   return await user.save();
 }
 
-
 /**
  * Sets a new password for a user.
  * @param {String} id - The user ID.
@@ -153,6 +152,24 @@ async function updateNoteContent(noteId, newContent) {
     { content: newContent, updatedAt: new Date() },
     { new: true }
   );
+}
+
+/**
+ * Retrieves all notes that belong to a specific user.
+ * @param {String} userId - The ID of the user.
+ * @returns {Promise<Array>} - An array of note documents belonging to the user.
+ */
+async function getNotesByUserId(ownerID) {
+  return await Note.find({ ownerID });
+}
+
+/**
+ * Deletes a note by its ID.
+ * @param {String} noteId - The ID of the note to remove.
+ * @returns {Promise<Object|null>} - The deleted note document, or null if no note was found.
+ */
+async function removeNote(noteId) {
+  return await Note.findByIdAndDelete(noteId);
 }
 
 // LISTS
@@ -226,6 +243,8 @@ module.exports = {
   createNote,
   noteBelongsToUser,
   updateNoteContent,
+  getNotesByUserId,
+  removeNote,
   addToList,
   setListItemCompletion,
   removeListItem

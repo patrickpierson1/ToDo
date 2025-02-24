@@ -12,6 +12,7 @@ const {
   setListItemCompletion,
   noteBelongsToUser,
   updateNoteContent,
+  getNotesByUserId, // New function to get notes by user ID
 } = require('./interface');
 
 // Determine if verbose mode is enabled.
@@ -79,9 +80,19 @@ const seedDB = async () => {
     if (verbose)
       console.log("Charlie's note after content update:", updatedCharlieNote);
 
+    // Get all notes that belong to each user.
+    const aliceNotes = await getNotesByUserId(user1._id);
+    const bobNotes = await getNotesByUserId(user2._id);
+    const charlieNotes = await getNotesByUserId(user3._id);
+    if (verbose) {
+      console.log("All notes for Alice:", aliceNotes);
+      console.log("All notes for Bob:", bobNotes);
+      console.log("All notes for Charlie:", charlieNotes);
+    }
+
     // Optionally output an organized view of the database.
     if (verbose) await printDBState();
-    else console.log("Seeding completed. Use -v or --verbose to see detailed output.")
+    else console.log("Seeding completed. Use -v or --verbose to see detailed output.");
   } catch (error) {
     console.error("Seeding failed:", error);
   } finally {
