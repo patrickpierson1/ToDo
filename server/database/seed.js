@@ -81,10 +81,10 @@ const seedDB = async () => {
 
     // Optionally output an organized view of the database.
     if (verbose) await printDBState();
+    else console.log("Seeding completed. Use -v or --verbose to see detailed output.")
   } catch (error) {
     console.error("Seeding failed:", error);
   } finally {
-    console.log("Seeding completed. Use -v or --verbose to see detailed output.")
     await disconnectDB();
   }
 };
