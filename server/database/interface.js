@@ -1,4 +1,4 @@
-// This file handles connecting to the local mongoDB server.
+// This file handles connecting to the remote mongoDB server.
 
 const mongoose = require('mongoose');
 require('dotenv').config();
