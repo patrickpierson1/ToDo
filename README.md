@@ -148,12 +148,7 @@ API is running...
 
 ---
 
-## **6️. Running Migrations and Seeding Data**
-(These setps are optional when initially setting up the db)
-### **Run Migrations**
-```sh
-node server/database/migrations/001-add-indexes.js
-```
+## **6️. Seeding Data**
 ### **Seed the Database**
 ```sh
 node server/database/seed.js
