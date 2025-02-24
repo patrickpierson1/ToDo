@@ -8,6 +8,11 @@ const Note = require('../models/Note'); // adjust path as needed
 
 // DATABASE
 
+/**
+ * Connects to the MongoDB database using the connection string from the environment variables.
+ * Logs a message on success, or logs an error and exits the process on failure.
+ * @returns {Promise<void>}
+ */
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
@@ -21,6 +26,11 @@ const connectDB = async () => {
   }
 };
 
+/**
+ * Disconnects from the MongoDB database.
+ * Logs a message once the connection is closed.
+ * @returns {Promise<void>}
+ */
 async function disconnectDB() {
   await mongoose.disconnect();
   console.log("Disconnected from MongoDB");
