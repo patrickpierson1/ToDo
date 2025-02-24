@@ -1,8 +1,13 @@
-const { MongoClient } = require('mongodb');
-const uri = "mongodb://admin:alpine2112@342.yonkers.dev:27017/dbname?authSource=admin";
-console.log("Started");
-MongoClient.connect(uri, (err, client) => {
-  if (err) return console.error(err);
-  console.log("Connected");
-  client.close();
-});
+require('dotenv').config({ path: './.env' });
+console.log("MONGO_URI:", process.env.MONGO_URI);
+
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 })
+  .then(() => {
+    console.log("Connected to MongoDB successfully!");
+    mongoose.connection.close();
+  })
+  .catch(err => {
+    console.error("Connection error:", err);
+  });
