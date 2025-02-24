@@ -8,7 +8,7 @@ const {
   disconnectDB,
   createUser,
   createNote,
-  addToNoteList,
+  addToList,
   setListItemCompletion,
   noteBelongsToUser,
   updateNoteContent,
@@ -55,9 +55,9 @@ const seedDB = async () => {
 
     // Bob's note with list items
     let bobNote = await createNote(user2, "Bob's Shopping List", "List of items to buy:");
-    bobNote = await addToNoteList(bobNote._id, "Milk");
-    bobNote = await addToNoteList(bobNote._id, "Bread");
-    bobNote = await addToNoteList(bobNote._id, "Eggs");
+    bobNote = await addToList(bobNote._id, "Milk");
+    bobNote = await addToList(bobNote._id, "Bread");
+    bobNote = await addToList(bobNote._id, "Eggs");
     // Mark the first item complete.
     const bobFirstItemId = bobNote.lists[0]._id;
     bobNote = await setListItemCompletion(bobNote._id, bobFirstItemId, true);

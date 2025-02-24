@@ -154,7 +154,7 @@ async function updateNoteContent(noteId, newContent) {
  * @param {String} text - The text for the new list entry.
  * @returns {Promise<Object|null>} - The updated note document, or null if not found.
  */
-async function addToNoteList(noteId, text) {
+async function addToList(noteId, text) {
   const listEntry = {
     text,
     completed: false,
@@ -186,6 +186,24 @@ async function setListItemCompletion(noteId, listEntryId, completed) {
   );
 }
 
+/**
+ * Removes a list entry from a note's "lists" array by its ID.
+ * Also updates the "updatedAt" field to the current time.
+ * @param {String} noteId - The ID of the note.
+ * @param {String} listEntryId - The ID of the list entry to remove.
+ * @returns {Promise<Object|null>} - The updated note document, or null if not found.
+ */
+async function removeListItem(noteId, listEntryId) {
+  return await Note.findByIdAndUpdate(
+    noteId,
+    {
+      $pull: { lists: { _id: listEntryId } },
+      $set: { updatedAt: new Date() }
+    },
+    { new: true }
+  );
+}
+
 module.exports = {
   connectDB,
   disconnectDB,
@@ -198,6 +216,7 @@ module.exports = {
   createNote,
   noteBelongsToUser,
   updateNoteContent,
-  addToNoteList,
-  setListItemCompletion
+  addToList,
+  setListItemCompletion,
+  removeListItem
 };
