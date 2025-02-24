@@ -12,10 +12,10 @@ const {
   setListItemCompletion,
   noteBelongsToUser,
   updateNoteContent,
-  getNotesByUserId, // New function to get notes by user ID
+  getNotesByUserId,
 } = require('./interface');
 
-// Determine if verbose mode is enabled.
+// Verbose mode flag.
 const verbose = process.argv.includes('-v') || process.argv.includes('--verbose');
 
 // Utility to print out the entire database state.
@@ -75,7 +75,7 @@ const seedDB = async () => {
     if (verbose)
       console.log(`Alice's first note belongs to Alice? ${ownership}`);
 
-    // Optional: Update a note's content (example update for Charlie's note)
+    // Update for Charlie's note.
     const updatedCharlieNote = await updateNoteContent(charlieNote._id, "Updated content for Charlie's note.");
     if (verbose)
       console.log("Charlie's note after content update:", updatedCharlieNote);
@@ -90,7 +90,6 @@ const seedDB = async () => {
       console.log("All notes for Charlie:", charlieNotes);
     }
 
-    // Optionally output an organized view of the database.
     if (verbose) await printDBState();
     else console.log("Seeding completed. Use -v or --verbose to see detailed output.");
   } catch (error) {
