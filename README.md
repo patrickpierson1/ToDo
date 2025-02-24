@@ -96,7 +96,7 @@ Replace``'yourName'`` and ```yourSecurePassword``` with your name and a strong p
 
 ### **Get the MongoDO URL**
   ```sh
-  mongodb://mason:yourSecurePassword@localhost:27017/ToDo?authSource=ToDo
+  mongodb://yourName:yourSecurePassword@localhost:27017/ToDo?authSource=ToDo
   ```
 
 ### **Generate a JWT secret**
@@ -106,7 +106,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 Create a `.env` file inside the `server/` directory and add the above like so:
 ```env
-MONGO_URI=mongodb://mason:yourSecurePassword@localhost:27017/ToDo?authSource=ToDo
+MONGO_URI=mongodb://yourName:yourSecurePassword@localhost:27017/ToDo?authSource=ToDo
 JWT_SECRET=a7c99f0c9e6d46f9e0f2b4f5b5e21f98de4e69c7d0b6a3ef40b109c6a6de6a8e
 PORT=5000
 ```
