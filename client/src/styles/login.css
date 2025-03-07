@@ -29,6 +29,31 @@
   margin: 5px 0;
 }
 
+/* Google Signin Seperator */
+.signinDivider{
+  border-bottom: 1px solid #979faf;
+  line-height: .1em;
+  margin: 10px 0 20px 10%;
+  text-align: center;
+  width: 80%;
+}
+
+.signinDivider span{
+  background: white;
+  padding: 0 10px
+}
+
+/* Password Visability Icon */
+.inputContainer{
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.visabilityButton{
+  position: absolute;
+}
+
 /* Form Inputs */
 .login-input {
   width: 100%;
@@ -57,7 +82,7 @@
   border: none;
   transition: background 0.3s, transform 0.2s;
   width: 30%;
-  margin-top: 20px;
+  margin: 15px;
 }
 
 .login-button:hover {
