@@ -1,0 +1,245 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  /* Header Container */
+  .header-container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  .header-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .title-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .date-input {
+    width: 100%;
+    max-width: 150px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Toolbar - fixed on the right side */
+  .toolbar {
+    position: fixed;
+    top: 20%;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+  }
+  
+  /* Force fixed dimensions for toolbar buttons */
+  .toolbar > button,
+  .draw-container > button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  /* Standard toolbar button styling */
+  .toolbar button {
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toolbar button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .toolbar button.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Draw container: relative positioning for drawing controls */
+  .draw-container {
+    position: relative;
+  }
+  
+  /* Drawing Controls in Draw Container */
+  .drawing-controls {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  /* Grid for Color Buttons (4x4) */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .color-button {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+  }
+  
+  /* A row container for the eraser and clear buttons (if used) */
+  .button-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+  }
+  
+  /* Erase Button for Drawing */
+  .erase-draw-button {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: 1px solid #dc3545;
+    background-color: #fff;
+    color: #dc3545;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .erase-draw-button:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* Note Content Container */
+  .note-content {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  /* Note Editor Container (for overlaying canvas) */
+  .note-editor-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Clips drawings to the editor area */
+  }
+  
+  /* Note Editor Styling - no extra margin so top/bottom match canvas */
+  .note-editor {
+    width: 100%;
+    min-height: 60vh;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow-y: auto;
+    text-align: left;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+  }
+  
+  /* Drawing Canvas Overlay - aligned to note editor via JS */
+  .drawing-canvas {
+    position: absolute;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='4' fill='black'/%3E%3C/svg%3E") 4 4, auto;
+  }
+  
+  /* Save Button Styling (in header) */
+  .save-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .save-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* NEW Export Button: same styling as Save */
+  .export-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px; /* sits below Save, above Clear */
+  }
+  
+  .export-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Clear Button Styling */
+  .clear-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .clear-button:hover {
+    background-color: #c82333;
+  }
+  
