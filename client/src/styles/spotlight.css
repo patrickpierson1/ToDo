@@ -1,0 +1,70 @@
+/* Stronger and Darker Spotlight Overlay */
+.spotlight-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Darker background */
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+  mask-image: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.9) 50%,
+    black 80%
+  ); /* Stronger gradient */
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.9) 50%,
+    black 80%
+  );
+}
+
+/* Spotlight Text Box */
+.spotlight-text-box {
+  position: fixed;
+  background: rgb(251, 251, 251);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+  z-index: 1001; /* Ensure it's above the overlay */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: none; /* Hidden by default */
+}
+
+/* Spotlight Header */
+.spotlight-header {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  background: rgb(238, 238, 238);
+  border-radius: 4px 4px 0 0;
+}
+
+/* Spotlight Footer (Continue Button with Gradient) */
+.spotlight-footer {
+  background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  text-align: center;
+  border: none;
+}
+
+.spotlight-footer:hover {
+  background: linear-gradient(90deg, #4338ca, #6d28d9);
+  transform: scale(1.05);
+}
