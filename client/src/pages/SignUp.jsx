@@ -1,7 +1,9 @@
 import "./../styles/login.css";
 import SignUpImage from "../assets/signup.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode'; 
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -33,6 +35,26 @@ const SignUp = () => {
     }
   };
   
+  const handleGoogleSignUp = (response) => {
+    try {
+      const decoded = jwtDecode(response.credential);
+      console.log("Google Sign-Up Success:", decoded);
+  
+      // store user details locally
+      const googleUser = {
+        username: decoded.name,
+        email: decoded.email,
+        profilePic: decoded.picture,
+        };
+      localStorage.setItem("user", JSON.stringify(googleUser));
+      localStorage.setItem("isLoggedIn", "true");
+      // redir to home
+      window.location.href = "/";
+          } catch (error) {
+      console.error("Google sign-ign error:", error);
+      setError("Google AUTH Failed!");
+          }
+      };
 
   return (
     <div className="login-container">
@@ -58,6 +80,15 @@ const SignUp = () => {
 
           <button type="submit" className="login-button">Submit</button>
         </form>
+
+        {/* Divider */}
+        <div className="signinDivider"><span>or</span></div>
+
+        { /* Google Login Button */}
+        <GoogleLogin
+        clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+          onSuccess={handleGoogleSignUp} 
+          onError={() => setError("Google Sign-Up Failed")} />
       </div>
     </div>
   );
