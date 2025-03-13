@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf';
 
 import BoldLogo from './Logos/BoldLogo.png';
 import ItalicLogo from './Logos/ItalicsLogo.png';
-import UnderlineLogo from './Logos/UnderlineLogo.png';
+import UnderlineLogo from './Logos/UnderLineLogo.png';
 import BulletLogo from './Logos/BulletLogo.png';
 import NumberLogo from './Logos/NumberingLogo.png';
 import DrawLogo from './Logos/DrawLogo.png';
