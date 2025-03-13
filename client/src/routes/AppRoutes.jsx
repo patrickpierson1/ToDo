@@ -6,11 +6,11 @@ import Contact from "../pages/Contact";
 import TutorialHome from "../pages/TutorialHome";
 import NotesHome from "../pages/NotesHome";
 import Note from "../pages/Note";
-import LoggedInHome from "../pages/LoggedInHome";
+import Profile from "../pages/Profile";
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("token");
-  return token ? children : <Navigate to="/login" />;
+  return children; // No need to check authentication
 };
+
 
 const AppRoutes = () => {
   return (
@@ -18,11 +18,12 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/dashboard" element={<ProtectedRoute><LoggedInHome /></ProtectedRoute>} />
+      <Route path="/dashboard" element={<Home />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/tutorial-home" element={<TutorialHome />} />
       <Route path="/noteshome" element={<NotesHome />} />
       <Route path="/note" element={<Note />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };

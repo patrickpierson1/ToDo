@@ -14,34 +14,25 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (password !== confirmPass) {
       setError("Passwords do not match.");
       return;
     }
-
+  
     try {
-      const response = await fetch("http://342.yonkers.dev:5000/api/auth/signup",
-        {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, favColor, password }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        setError(data.message || "Sign up failed.");
-        return;
-      }
-
-      localStorage.setItem("token", data.token);
-
-      // redirect to logged in page once signed in
-      navigate("/dashboard");
+      // Save user details locally
+      const newUser = { username, favColor, password };
+      localStorage.setItem("user", JSON.stringify(newUser)); // Store user data
+      localStorage.setItem("isLoggedIn", "false"); // Ensure they login manually
+  
+      // Redirect to login page after sign up
+      navigate("/login");  
     } catch (err) {
       setError("Something went wrong.");
     }
   };
+  
 
   return (
     <div className="login-container">
