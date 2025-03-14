@@ -3,8 +3,10 @@ const cors = require('cors');
 const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const mongoose = require("mongoose");
 require('dotenv').config(); // Load environment variables
 const connectDB = require('./config/db.js');
+const User = require('./models/User');
 
 // Connect to MongoDB
 connectDB();
@@ -14,7 +16,18 @@ const app = express();
 
 // Middleware
 app.use(express.json()); // Parse JSON bodies
-app.use(cors()); // Enable CORS
+
+const allowedOrigins = [
+	process.env.FRONTEND_URL,
+	"https://f416-76-28-209-119.ngrok-free.app"
+];
+
+app.use(
+	cors({
+		origin: allowedOrigins,
+		credentials: true,
+	})
+); // Enable CORS
 
 app.use(
   session({
@@ -34,53 +47,44 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
-    (accessToken, refreshToken, profile, done) => {
-	  console.log("Google OAuth Success");
-	  console.log("Access Token:", accessToken);
-	  console.log("User Profile:", profile);
-      return done(null, profile);
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+      	let user = await User.findOne({ googleId: profile.id });
+
+      	if (!user) {
+      		user = new User({
+      			googleId: profile.id,
+      			email: profile.emails[0].value,
+      			username: profile.displayName,
+      			profilePic: profile.photos[0].value,
+      		});
+      		await user.save();
+      	}
+      	return done(null, user);
+      } catch (error) {
+      	console.error("Google OAuth Error:", error);
+      	return done(error, null);
+      }
     }
-  )
+   )
 );
-
+ 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
-});
-
-app.get(
-  "/api/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
-
-app.get(
-  "/api/auth/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-    successRedirect: "/dashboard",
-  })
-);
-
-app.get("/api/auth/status", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.json({ user: req.user });
-  } else {
-    res.status(401).json({ error: "Not authenticated" });
+passport.deserializeUser(async (id, done) => {
+  try {
+  	const user = await User.findById(id);
+  	done(null, user);
+  } catch (err) {
+  	done(err, null);
   }
-});
-
-app.get("/api/auth/logout", (req, res) => {
-  req.logout(() => {
-    res.redirect("/");
-  });
 });
 
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/notes', require('./routes/noteRoutes'));
-
+//root route
 app.get('/', (req, res) => {
   res.send('API is running...');
 });

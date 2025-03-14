@@ -13,11 +13,21 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn === "true") {
-      navigate("/");  // Redirect if already logged in
-    }
-  }, [navigate]);
+    const checkAuthStatus = async () => {
+    	try {
+    		const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/auth/status", {
+    			credentials: "include",
+    		});
+    		const data = await res.json();
+    		if (res.ok && data.user) {
+    			navigate("/");
+    		}
+    	} catch (error) {
+    		console.error("Auth check failed", error);
+    	}
+    };
+    checkAuthStatus();
+   }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,18 +48,37 @@ const Login = () => {
     window.location.href = "/";
   };
 
-  const handleGoogleSignIn = (response) => {
+  const handleGoogleSignIn = async (response) => {
 	try {
 		const decoded = jwtDecode(response.credential);
 		console.log("Google Login Success:", decoded);
 
-		// store user details locally
+		// preparing the user data
 		const googleUser = {
+			googleId: decoded.sub,
 			username: decoded.name,
 			email: decoded.email,
 			profilePic: decoded.picture,
 			};
-		localStorage.setItem("user", JSON.stringify(googleUser));
+		// send data to backend API
+		const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/auth/google/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(googleUser)
+		});
+
+		if (!res.ok) {
+			console.error("Failed to auth with google");
+			setError("google Login Failed");
+			return;
+		}
+		const userData = await res.json();
+		console.log("User authenticated:", userData);
+
+		//store session info locally
+		localStorage.setItem("user", JSON.stringify(userData.user));
 		localStorage.setItem("isLoggedIn", "true");
 		// redir to home
 		window.location.href = "/";
@@ -106,7 +135,6 @@ const Login = () => {
 
 	  { /* Google Login Button */}
 	  <GoogleLogin
-		clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
 	    onSuccess={handleGoogleSignIn} 
 	    onError={() => setError("Google Login Failed")} />
         </div>

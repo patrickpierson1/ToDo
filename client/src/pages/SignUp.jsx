@@ -35,19 +35,37 @@ const SignUp = () => {
     }
   };
   
-  const handleGoogleSignUp = (response) => {
+  const handleGoogleSignUp = async (response) => {
     try {
       const decoded = jwtDecode(response.credential);
       console.log("Google Sign-Up Success:", decoded);
   
-      // store user details locally
+      // prepare user data for backend
       const googleUser = {
+        googleId: decoded.sub,
         username: decoded.name,
         email: decoded.email,
         profilePic: decoded.picture,
         };
-      localStorage.setItem("user", JSON.stringify(googleUser));
-      localStorage.setItem("isLoggedIn", "true");
+      // send request to backend API
+      const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/auth/google/signup", {
+      	method: "POST",
+      	headers: {
+      		"Content-Type": "application/json"
+      	},
+      	body: JSON.stringify(googleUser)
+      });
+      if (res.ok) {
+      	console.log("User successfully saved to MongoDB");
+      	const userData = await res.json();
+
+      	//store session info locally
+      	localStorage.setItem("user", JSON.stringify(userData.user));
+      	localStorage.setItem("isLoggedIn", "true");
+      } else {
+      	console.error("Failed to save user to MongoDB");
+      	setError("Google Sign-Up Failed");
+      }
       // redir to home
       window.location.href = "/";
           } catch (error) {
@@ -86,7 +104,6 @@ const SignUp = () => {
 
         { /* Google Login Button */}
         <GoogleLogin
-        clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
           onSuccess={handleGoogleSignUp} 
           onError={() => setError("Google Sign-Up Failed")} />
       </div>
