@@ -42,7 +42,8 @@ const Home = () => {
             <p className="feature-description">
               These are examples that some of our users have decided to publish to help inspire your note-taking.
             </p>
-            <button className="feature-button">View Examples</button>
+            {/* <button className="feature-button">View Examples</button> */}
+            <Link className="feature-button" to="/examples">View Examples</Link>
           </div>
         </div>
       </section>
