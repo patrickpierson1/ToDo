@@ -17,7 +17,7 @@ const Home = () => {
           <p className="hero-subtitle">
             Stay on track with a new way to take simple yet creative notes that incorporate deadlines, task tracking, and more.
           </p>
-          <button className="cta-button">Get Started</button>
+          <Link className="cta-button" to="/tutorial-home">Get Started</Link>
         </div>
       </section>
 
@@ -31,7 +31,7 @@ const Home = () => {
             <p className="feature-description">
               Learn how to take useful, yet visually appealing notes, while keeping track of important deadlines and tasks along the way.
             </p>
-            <button className="feature-button">Add First Task</button>
+            <Link className="feature-button" to="/tutorial-home">Add First Task</Link>
           </div>
         </div>
 
