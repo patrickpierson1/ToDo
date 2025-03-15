@@ -1,4 +1,5 @@
 import "./../styles/home.css";
+import {Link} from "react-router-dom";
 import HomeIcon1 from "../assets/homeicon1.svg";
 import HomeIcon2 from "../assets/homeicon2.svg";
 import HomeIcon3 from "../assets/homeicon3.svg";

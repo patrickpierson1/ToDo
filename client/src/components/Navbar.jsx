@@ -23,6 +23,11 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/tutorial-home">Tutorial Home</Link>
         <Link to="/contact">Contact</Link>
+        {isLoggedIn ? (
+        	<>
+        		<Link to="/notesHome">Notes</Link>
+        	</>
+        ) : (<></>)}
       </div>
 
       <div className="nav-actions">
