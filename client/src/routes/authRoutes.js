@@ -23,7 +23,7 @@ router.get(
 );
 
 //check auth status
-router.get("/status", (req res) => {
+router.get("/status", (req, res) => {
 	if (req.isAuthenticated()) {
 		res.json({ user: req.user });
 	} else {
