@@ -8,6 +8,7 @@ import NotesHome from "../pages/NotesHome";
 import Note from "../pages/Note";
 import Profile from "../pages/Profile";
 import Examples from "../pages/Examples";
+import FAQ from "../pages/FAQ";
 const ProtectedRoute = ({ children }) => {
   return children; // No need to check authentication
 };
@@ -26,6 +27,7 @@ const AppRoutes = () => {
       <Route path="/note" element={<Note />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/examples" element={<Examples />} />
+      <Route path="/faq" element={<FAQ />} />
     </Routes>
   );
 };
